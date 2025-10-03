@@ -4,6 +4,7 @@
  */
 package view;
 
+import dao.UsuarioDao;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -23,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import model.Usuario;
 
 
 /**
@@ -149,6 +151,7 @@ public class LoginView extends javax.swing.JFrame {
         fieldLogin = new javax.swing.JTextField();
         fieldSenha = new javax.swing.JPasswordField();
         jToggleButton1 = new javax.swing.JToggleButton();
+        lblMensagem = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(650, 600));
@@ -181,6 +184,11 @@ public class LoginView extends javax.swing.JFrame {
         jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
         jToggleButton1.setText("Entrar");
         jToggleButton1.setBorder(null);
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,7 +216,8 @@ public class LoginView extends javax.swing.JFrame {
                                 .addGap(181, 181, 181))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(fieldLogin)
-                                .addComponent(fieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(fieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblMensagem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(212, 212, 212))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(265, 265, 265)
@@ -223,7 +232,9 @@ public class LoginView extends javax.swing.JFrame {
                     .addComponent(imgreverseLabel))
                 .addGap(10, 10, 10)
                 .addComponent(tituloJlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtLogin)
                 .addGap(5, 5, 5)
                 .addComponent(fieldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,7 +244,7 @@ public class LoginView extends javax.swing.JFrame {
                 .addComponent(fieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         pack();
@@ -242,6 +253,26 @@ public class LoginView extends javax.swing.JFrame {
     private void fieldLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldLoginActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        String login = fieldLogin.getText();
+        String senha = new String(fieldSenha.getPassword());
+
+        UsuarioDao usuarioDAO = new UsuarioDao();
+        Usuario usuario = usuarioDAO.autenticar(login, senha);
+
+        if (usuario != null) {
+            // Login válido, abre Dashboard
+            DashboardView dashboard = new DashboardView();
+            dashboard.setVisible(true);
+            this.dispose(); // fecha tela de login
+        } else {
+            // Login inválido, exibe mensagem vermelha
+            lblMensagem.setText("Login ou senha inexistente/errado");
+            lblMensagem.setForeground(Color.RED);
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -285,6 +316,7 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JLabel imgLabel;
     private javax.swing.JLabel imgreverseLabel;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JLabel lblMensagem;
     private javax.swing.JLabel tituloJlabel;
     private javax.swing.JLabel txtLogin;
     private javax.swing.JLabel txtSenha;

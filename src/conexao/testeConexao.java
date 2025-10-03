@@ -9,8 +9,9 @@ package conexao;
  * @author lucelia
  */
 public class testeConexao {
+    /*
     public static void main(String[] args) {
         ConexaoBD.getConexao();
     }
-    
+    */
 }
