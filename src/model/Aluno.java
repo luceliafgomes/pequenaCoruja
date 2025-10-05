@@ -4,27 +4,37 @@
  */
 package model;
 
-
+import java.time.LocalDate;
 
 /**
  *
  * @author lucelia
  */
 public class Aluno {
+    private int idAluno;
     private String nome;
-    private String dataNascimento;
-    private String HistoricoEscolar;
+    private LocalDate dataNascimento;
+    private String historicoEscolar;
+    private int idResponsavel;
+    private int idTurma;
+
     
-    public Aluno(String nome, String dataNascimento, String historicoEscolar){
-        this.nome = nome;
-        this.dataNascimento = dataNascimento;
-        this.HistoricoEscolar = historicoEscolar;
-    }
-    
-    @Override
-    public String toString(){
-        return nome + " - Nasc: " + dataNascimento + " -  Histórico: " + HistoricoEscolar;
-    }
-    
+     public int getIdAluno() { return idAluno; }
+    public void setIdAluno(int idAluno) { this.idAluno = idAluno; }
+
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+
+    public LocalDate getDataNascimento() { return dataNascimento; }
+    public void setDataNascimento(LocalDate dataNascimento) { this.dataNascimento = dataNascimento; }
+
+    public String getHistoricoEscolar() { return historicoEscolar; }
+    public void setHistoricoEscolar(String historicoEscolar) { this.historicoEscolar = historicoEscolar; }
+
+    public int getIdResponsavel() { return idResponsavel; }
+    public void setIdResponsavel(int idResponsavel) { this.idResponsavel = idResponsavel; }
+
+    public int getIdTurma() { return idTurma; }
+    public void setIdTurma(int idTurma) { this.idTurma = idTurma; }
     
 }

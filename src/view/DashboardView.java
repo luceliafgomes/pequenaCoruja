@@ -59,11 +59,9 @@ public class DashboardView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         imgCoruja1 = new javax.swing.JLabel();
         imgSair = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblAlunos = new javax.swing.JLabel();
+        lblProfessores = new javax.swing.JLabel();
+        lblTurmas = new javax.swing.JLabel();
         imgCoruja2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,25 +82,18 @@ public class DashboardView extends javax.swing.JFrame {
 
         imgSair.setText("sair");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Alunos");
+        lblAlunos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblAlunos.setForeground(new java.awt.Color(255, 255, 255));
+        lblAlunos.setText("Alunos");
+        lblAlunos.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Atividades");
+        lblProfessores.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblProfessores.setForeground(new java.awt.Color(255, 255, 255));
+        lblProfessores.setText("Professores");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Professores");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Turmas");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Notas");
+        lblTurmas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblTurmas.setForeground(new java.awt.Color(255, 255, 255));
+        lblTurmas.setText("Turmas");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -117,11 +108,9 @@ public class DashboardView extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(imgSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -131,19 +120,99 @@ public class DashboardView extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(imgCoruja1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(44, 44, 44)
-                .addComponent(jLabel2)
-                .addGap(46, 46, 46)
-                .addComponent(jLabel4)
-                .addGap(54, 54, 54)
-                .addComponent(jLabel5)
-                .addGap(47, 47, 47)
-                .addComponent(jLabel6)
-                .addGap(40, 40, 40)
+                .addComponent(lblAlunos)
+                .addGap(61, 61, 61)
+                .addComponent(lblProfessores)
+                .addGap(64, 64, 64)
+                .addComponent(lblTurmas)
+                .addGap(170, 170, 170)
                 .addComponent(imgSair)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
+
+        imgSair.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // Code adding the component to the parent container - not shown here
+        imgSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                LoginView loginView = new LoginView();
+                loginView.setVisible(true);
+                DashboardView.this.dispose();
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                imgSair.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                imgSair.setForeground(Color.BLUE); // volta cor original
+            }
+        });
+        lblAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                CadastroAluno alunoView = new CadastroAluno();
+                alunoView.setVisible(true);
+                DashboardView.this.dispose();
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblAlunos.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblAlunos.setForeground(Color.BLUE); // volta cor original
+            }
+        });
+        lblProfessores.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // Code adding the component to the parent container - not shown here
+        lblProfessores.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                CadastroProfessor profView = new CadastroProfessor();
+                profView.setVisible(true);
+                DashboardView.this.dispose();
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblProfessores.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblProfessores.setForeground(Color.BLUE); // volta cor original
+            }
+        });
+        lblTurmas.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // Code adding the component to the parent container - not shown here
+        lblTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                CadastroTurmas turmaView = new CadastroTurmas();
+                turmaView.setVisible(true);
+                DashboardView.this.dispose();
+
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblTurmas.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblTurmas.setForeground(Color.BLUE); // volta cor original
+            }
+        });
 
         imgCoruja2.setText("coruja02");
         imgCoruja2.setMaximumSize(new java.awt.Dimension(150, 150));
@@ -156,7 +225,7 @@ public class DashboardView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
                 .addComponent(imgCoruja2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -164,7 +233,7 @@ public class DashboardView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(467, Short.MAX_VALUE)
                 .addComponent(imgCoruja2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -223,12 +292,10 @@ public class DashboardView extends javax.swing.JFrame {
     private javax.swing.JLabel imgCoruja1;
     private javax.swing.JLabel imgCoruja2;
     private javax.swing.JLabel imgSair;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblAlunos;
+    private javax.swing.JLabel lblProfessores;
+    private javax.swing.JLabel lblTurmas;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,11 +4,14 @@
  */
 package view;
 
+import dao.AlunoDao;
 import java.awt.BorderLayout;
 import java.awt.*;
 import java.awt.Image;
+import java.time.LocalDate;
 import javax.swing.ImageIcon;
 import javax.swing.*;
+import model.Aluno;
 
 /**
  *
@@ -58,27 +61,25 @@ public class CadastroAluno extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         imgCoruja1 = new javax.swing.JLabel();
+        lblAlunos = new javax.swing.JLabel();
+        lblProfessores = new javax.swing.JLabel();
+        lblTurmas = new javax.swing.JLabel();
         imgSair = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         imgCoruja2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        nomeField = new javax.swing.JTextField();
+        responsavelField = new javax.swing.JTextField();
+        dtNascimentoField = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        Salvar = new javax.swing.JButton();
-        Salvar1 = new javax.swing.JButton();
-        Salvar2 = new javax.swing.JButton();
-        Salvar3 = new javax.swing.JButton();
+        historicoTxtArea = new javax.swing.JTextArea();
+        salvarBtn = new javax.swing.JButton();
+        cancelarBtn = new javax.swing.JButton();
+        excluirBtn = new javax.swing.JButton();
+        listarAlunosBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 219, 255));
@@ -97,27 +98,20 @@ public class CadastroAluno extends javax.swing.JFrame {
         imgCoruja1.setMinimumSize(new java.awt.Dimension(150, 150));
         imgCoruja1.setPreferredSize(new java.awt.Dimension(150, 150));
 
+        lblAlunos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblAlunos.setForeground(new java.awt.Color(255, 255, 255));
+        lblAlunos.setText("Alunos");
+        lblAlunos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        lblProfessores.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblProfessores.setForeground(new java.awt.Color(255, 255, 255));
+        lblProfessores.setText("Professores");
+
+        lblTurmas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblTurmas.setForeground(new java.awt.Color(255, 255, 255));
+        lblTurmas.setText("Turmas");
+
         imgSair.setText("sair");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Alunos");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Atividades");
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Professores");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Turmas");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Notas");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -126,17 +120,15 @@ public class CadastroAluno extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(imgCoruja1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(imgSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -145,20 +137,100 @@ public class CadastroAluno extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(imgCoruja1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(44, 44, 44)
-                .addComponent(jLabel2)
-                .addGap(46, 46, 46)
-                .addComponent(jLabel4)
-                .addGap(54, 54, 54)
-                .addComponent(jLabel5)
-                .addGap(47, 47, 47)
-                .addComponent(jLabel6)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
+                .addComponent(lblAlunos)
+                .addGap(61, 61, 61)
+                .addComponent(lblProfessores)
+                .addGap(64, 64, 64)
+                .addComponent(lblTurmas)
+                .addGap(170, 170, 170)
                 .addComponent(imgSair)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        lblAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                CadastroAluno alunoView = new CadastroAluno();
+                alunoView.setVisible(true);
+                CadastroAluno.this.dispose();
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblAlunos.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblAlunos.setForeground(Color.BLUE); // volta cor original
+            }
+        });
+        lblProfessores.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // Code adding the component to the parent container - not shown here
+        lblProfessores.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                CadastroProfessor profView = new CadastroProfessor();
+                profView.setVisible(true);
+                CadastroAluno.this.dispose();
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblProfessores.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblProfessores.setForeground(Color.BLUE); // volta cor original
+            }
+        });
+        lblTurmas.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // Code adding the component to the parent container - not shown here
+        lblTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                CadastroTurmas turmaView = new CadastroTurmas();
+                turmaView.setVisible(true);
+                CadastroAluno.this.dispose();
+
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblTurmas.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblTurmas.setForeground(Color.BLUE); // volta cor original
+            }
+        });
+        imgSair.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // Code adding the component to the parent container - not shown here
+        imgSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                LoginView loginView = new LoginView();
+                loginView.setVisible(true);
+                CadastroAluno.this.dispose();
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                imgSair.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                imgSair.setForeground(Color.BLUE); // volta cor original
+            }
+        });
 
         imgCoruja2.setText("coruja02");
         imgCoruja2.setMaximumSize(new java.awt.Dimension(150, 150));
@@ -180,63 +252,68 @@ public class CadastroAluno extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel11.setText("Historico:");
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField2.setBorder(null);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        nomeField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nomeField.setBorder(null);
+        nomeField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                nomeFieldActionPerformed(evt);
             }
         });
 
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField3.setBorder(null);
+        responsavelField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        responsavelField.setBorder(null);
 
-        jFormattedTextField1.setBorder(null);
-        jFormattedTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        dtNascimentoField.setBorder(null);
+        dtNascimentoField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(null);
-        jScrollPane1.setViewportView(jTextArea1);
+        historicoTxtArea.setColumns(20);
+        historicoTxtArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        historicoTxtArea.setRows(5);
+        historicoTxtArea.setBorder(null);
+        jScrollPane1.setViewportView(historicoTxtArea);
 
-        Salvar.setBackground(new java.awt.Color(200, 162, 200));
-        Salvar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Salvar.setForeground(new java.awt.Color(255, 255, 255));
-        Salvar.setText("Salvar");
-        Salvar.setBorder(null);
-        Salvar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        Salvar1.setBackground(new java.awt.Color(200, 162, 200));
-        Salvar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Salvar1.setForeground(new java.awt.Color(255, 255, 255));
-        Salvar1.setText("Cancelar");
-        Salvar1.setBorder(null);
-        Salvar1.addActionListener(new java.awt.event.ActionListener() {
+        salvarBtn.setBackground(new java.awt.Color(200, 162, 200));
+        salvarBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        salvarBtn.setForeground(new java.awt.Color(255, 255, 255));
+        salvarBtn.setText("Salvar");
+        salvarBtn.setBorder(null);
+        salvarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        salvarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Salvar1ActionPerformed(evt);
+                salvarBtnActionPerformed(evt);
             }
         });
 
-        Salvar2.setBackground(new java.awt.Color(200, 162, 200));
-        Salvar2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Salvar2.setForeground(new java.awt.Color(255, 255, 255));
-        Salvar2.setText("Excluir");
-        Salvar2.setBorder(null);
-        Salvar2.addActionListener(new java.awt.event.ActionListener() {
+        cancelarBtn.setBackground(new java.awt.Color(200, 162, 200));
+        cancelarBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cancelarBtn.setForeground(new java.awt.Color(255, 255, 255));
+        cancelarBtn.setText("Cancelar");
+        cancelarBtn.setBorder(null);
+        cancelarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Salvar2ActionPerformed(evt);
+                cancelarBtnActionPerformed(evt);
             }
         });
 
-        Salvar3.setBackground(new java.awt.Color(200, 162, 200));
-        Salvar3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Salvar3.setForeground(new java.awt.Color(255, 255, 255));
-        Salvar3.setText("Listar Alunos");
-        Salvar3.setBorder(null);
-        Salvar3.addActionListener(new java.awt.event.ActionListener() {
+        excluirBtn.setBackground(new java.awt.Color(200, 162, 200));
+        excluirBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        excluirBtn.setForeground(new java.awt.Color(255, 255, 255));
+        excluirBtn.setText("Excluir");
+        excluirBtn.setBorder(null);
+        excluirBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Salvar3ActionPerformed(evt);
+                excluirBtnActionPerformed(evt);
+            }
+        });
+
+        listarAlunosBtn.setBackground(new java.awt.Color(200, 162, 200));
+        listarAlunosBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        listarAlunosBtn.setForeground(new java.awt.Color(255, 255, 255));
+        listarAlunosBtn.setText("Listar Alunos");
+        listarAlunosBtn.setBorder(null);
+        listarAlunosBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listarAlunosBtnActionPerformed(evt);
             }
         });
 
@@ -255,7 +332,7 @@ public class CadastroAluno extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Salvar3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(listarAlunosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(imgCoruja2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
@@ -263,11 +340,11 @@ public class CadastroAluno extends javax.swing.JFrame {
                         .addGap(74, 74, 74)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(salvarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(112, 112, 112)
-                                .addComponent(Salvar2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(excluirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Salvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -277,9 +354,9 @@ public class CadastroAluno extends javax.swing.JFrame {
                                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jFormattedTextField1)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))))
+                                    .addComponent(dtNascimentoField)
+                                    .addComponent(nomeField)
+                                    .addComponent(responsavelField, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))))
                         .addContainerGap(31, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -291,31 +368,31 @@ public class CadastroAluno extends javax.swing.JFrame {
                 .addGap(78, 78, 78)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dtNascimentoField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(responsavelField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Salvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Salvar2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(salvarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(excluirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(imgCoruja2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(Salvar3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(listarAlunosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -333,21 +410,47 @@ public class CadastroAluno extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void nomeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_nomeFieldActionPerformed
 
-    private void Salvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Salvar1ActionPerformed
+    private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Salvar1ActionPerformed
+    }//GEN-LAST:event_cancelarBtnActionPerformed
 
-    private void Salvar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Salvar2ActionPerformed
+    private void excluirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Salvar2ActionPerformed
+    }//GEN-LAST:event_excluirBtnActionPerformed
 
-    private void Salvar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Salvar3ActionPerformed
+    private void listarAlunosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarAlunosBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Salvar3ActionPerformed
+    }//GEN-LAST:event_listarAlunosBtnActionPerformed
+
+    private void salvarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarBtnActionPerformed
+        // TODO add your handling code here:
+         try {
+            Aluno aluno = new Aluno();
+            aluno.setNome(nomeField.getText());
+            aluno.setDataNascimento(LocalDate.parse(dtNascimentoField.getText())); // formato: yyyy-MM-dd
+            aluno.setHistoricoEscolar(historicoTxtArea.getText());
+
+            // Exemplo: vamos assumir que o responsável e a turma serão definidos fixos ou virão de campos escondidos
+            aluno.setIdResponsavel(1); // exemplo temporário
+            aluno.setIdTurma(1); // exemplo temporário
+
+            AlunoDao dao = new AlunoDao();
+            dao.salvarAluno(aluno);
+
+            // Limpa os campos
+            nomeField.setText("");
+            dtNascimentoField.setText("");
+            historicoTxtArea.setText("");
+            responsavelField.setText("");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+        }        
+    }//GEN-LAST:event_salvarBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -388,29 +491,27 @@ public class CadastroAluno extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Salvar;
-    private javax.swing.JButton Salvar1;
-    private javax.swing.JButton Salvar2;
-    private javax.swing.JButton Salvar3;
+    private javax.swing.JButton cancelarBtn;
+    private javax.swing.JFormattedTextField dtNascimentoField;
+    private javax.swing.JButton excluirBtn;
+    private javax.swing.JTextArea historicoTxtArea;
     private javax.swing.JLabel imgCoruja1;
     private javax.swing.JLabel imgCoruja2;
     private javax.swing.JLabel imgSair;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel lblAlunos;
+    private javax.swing.JLabel lblProfessores;
+    private javax.swing.JLabel lblTurmas;
+    private javax.swing.JButton listarAlunosBtn;
+    private javax.swing.JTextField nomeField;
+    private javax.swing.JTextField responsavelField;
+    private javax.swing.JButton salvarBtn;
     // End of variables declaration//GEN-END:variables
 }
