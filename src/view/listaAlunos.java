@@ -4,11 +4,17 @@
  */
 package view;
 
+import dao.AlunoDao;
 import java.awt.BorderLayout;
 import java.awt.*;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
-import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Aluno;
+import utils.ButtonUtils;
 
 /**
  *
@@ -21,6 +27,13 @@ public class listaAlunos extends javax.swing.JFrame {
      */
     public listaAlunos() {
         initComponents();
+        
+        DefaultTableModel model = (DefaultTableModel) alunosTable.getModel();
+        model.addColumn("ID"); // primeira coluna, invisível
+        alunosTable.getColumnModel().getColumn(0).setMinWidth(0);
+        alunosTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        alunosTable.getColumnModel().getColumn(0).setWidth(0);
+        
         setSize(800, 650);
         setLocationRelativeTo(null);
         
@@ -56,6 +69,8 @@ public class listaAlunos extends javax.swing.JFrame {
        txtBtnEditar.setIcon(new ImageIcon(imgEditIco));
         
        excluirTextBtn.setIcon(new ImageIcon(imgDeleteIco));
+    
+       preencherTabela();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,18 +85,16 @@ public class listaAlunos extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         imgCoruja1 = new javax.swing.JLabel();
         imgSair = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblTurmas = new javax.swing.JLabel();
+        lblProfessores = new javax.swing.JLabel();
+        lblAlunos = new javax.swing.JLabel();
         imgCoruja2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        alunosTable = new javax.swing.JTable();
         excluirTextBtn = new javax.swing.JLabel();
         txtBtnEditar = new javax.swing.JLabel();
-        Salvar3 = new javax.swing.JButton();
+        btnCadastrarAlunos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 219, 255));
@@ -101,25 +114,18 @@ public class listaAlunos extends javax.swing.JFrame {
 
         imgSair.setText("sair");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Alunos");
+        lblTurmas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblTurmas.setForeground(new java.awt.Color(255, 255, 255));
+        lblTurmas.setText("Turmas");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Atividades");
+        lblProfessores.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblProfessores.setForeground(new java.awt.Color(255, 255, 255));
+        lblProfessores.setText("Professores");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Professores");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Turmas");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Notas");
+        lblAlunos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblAlunos.setForeground(new java.awt.Color(255, 255, 255));
+        lblAlunos.setText("Alunos");
+        lblAlunos.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -134,33 +140,111 @@ public class listaAlunos extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(imgSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(15, 15, 15))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(imgCoruja1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(44, 44, 44)
-                .addComponent(jLabel2)
-                .addGap(46, 46, 46)
-                .addComponent(jLabel4)
-                .addGap(54, 54, 54)
-                .addComponent(jLabel5)
-                .addGap(47, 47, 47)
-                .addComponent(jLabel6)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
+                .addComponent(lblAlunos)
+                .addGap(61, 61, 61)
+                .addComponent(lblProfessores)
+                .addGap(64, 64, 64)
+                .addComponent(lblTurmas)
+                .addGap(170, 170, 170)
                 .addComponent(imgSair)
-                .addContainerGap(659, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        imgSair.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // Code adding the component to the parent container - not shown here
+        imgSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                LoginView loginView = new LoginView();
+                loginView.setVisible(true);
+                listaAlunos.this.dispose();
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                imgSair.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                imgSair.setForeground(Color.WHITE); // volta cor original
+            }
+        });
+        lblTurmas.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // Code adding the component to the parent container - not shown here
+        lblTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                CadastroTurmas turmaView = new CadastroTurmas();
+                turmaView.setVisible(true);
+                listaAlunos.this.dispose();
+
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblTurmas.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblTurmas.setForeground(Color.WHITE); // volta cor original
+            }
+        });
+        lblProfessores.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // Code adding the component to the parent container - not shown here
+        lblProfessores.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                CadastroProfessor profView = new CadastroProfessor();
+                profView.setVisible(true);
+                listaAlunos.this.dispose();
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblProfessores.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblProfessores.setForeground(Color.WHITE); // volta cor original
+            }
+        });
+        lblAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                CadastroAluno alunoView = new CadastroAluno();
+                alunoView.setVisible(true);
+                listaAlunos.this.dispose();
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblAlunos.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblAlunos.setForeground(Color.WHITE); // volta cor original
+            }
+        });
 
         imgCoruja2.setText("coruja02");
         imgCoruja2.setMaximumSize(new java.awt.Dimension(150, 150));
@@ -170,10 +254,10 @@ public class listaAlunos extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
         jLabel3.setText("Lista de Alunos");
 
-        jTable1.setBackground(new java.awt.Color(200, 162, 200));
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        alunosTable.setBackground(new java.awt.Color(200, 162, 200));
+        alunosTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        alunosTable.setForeground(new java.awt.Color(0, 0, 0));
+        alunosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null}
@@ -182,7 +266,7 @@ public class listaAlunos extends javax.swing.JFrame {
                 "Nome", "Turma"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(alunosTable);
 
         excluirTextBtn.setText("Excluir");
         excluirTextBtn.setMaximumSize(new java.awt.Dimension(45, 45));
@@ -194,14 +278,14 @@ public class listaAlunos extends javax.swing.JFrame {
         txtBtnEditar.setMinimumSize(new java.awt.Dimension(42, 42));
         txtBtnEditar.setPreferredSize(new java.awt.Dimension(42, 42));
 
-        Salvar3.setBackground(new java.awt.Color(200, 162, 200));
-        Salvar3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Salvar3.setForeground(new java.awt.Color(255, 255, 255));
-        Salvar3.setText("Cadastrar Alunos");
-        Salvar3.setBorder(null);
-        Salvar3.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrarAlunos.setBackground(new java.awt.Color(200, 162, 200));
+        btnCadastrarAlunos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCadastrarAlunos.setForeground(new java.awt.Color(255, 255, 255));
+        btnCadastrarAlunos.setText("Cadastrar Alunos");
+        btnCadastrarAlunos.setBorder(null);
+        btnCadastrarAlunos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Salvar3ActionPerformed(evt);
+                btnCadastrarAlunosActionPerformed(evt);
             }
         });
 
@@ -215,9 +299,9 @@ public class listaAlunos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(21, Short.MAX_VALUE))
+                        .addContainerGap(57, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 157, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -225,7 +309,7 @@ public class listaAlunos extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(Salvar3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnCadastrarAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(37, 37, 37))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(txtBtnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,20 +327,51 @@ public class listaAlunos extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 24, Short.MAX_VALUE)
                         .addComponent(imgCoruja2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtBtnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(excluirTextBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(Salvar3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCadastrarAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(596, 596, 596))
         );
+
+        txtBtnEditar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        txtBtnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int linhaSelecionada = alunosTable.getSelectedRow();
+                if (linhaSelecionada == -1) {
+                    JOptionPane.showMessageDialog(null, "Selecione um aluno para editar!", "Atenção", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                // Supondo que a primeira coluna seja o ID ou o nome do aluno
+                String nomeAluno = alunosTable.getValueAt(linhaSelecionada, 0).toString();
+
+                AlunoDao dao = new AlunoDao();
+                Aluno aluno = dao.buscarPorNome(nomeAluno);
+
+                CadastroAluno cadastroView = new CadastroAluno(aluno);
+                cadastroView.setVisible(true);
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtBtnEditar.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtBtnEditar.setForeground(Color.BLACK); // volta cor original
+            }
+        });
+        ButtonUtils.estilizarBotao(btnCadastrarAlunos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -272,10 +387,25 @@ public class listaAlunos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Salvar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Salvar3ActionPerformed
+    private void btnCadastrarAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAlunosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Salvar3ActionPerformed
+        CadastroAluno alunosCad = new CadastroAluno();
+        alunosCad.setVisible(true);
+        listaAlunos.this.dispose();
+    }//GEN-LAST:event_btnCadastrarAlunosActionPerformed
+    public void preencherTabela() {
+        String[] colunas = {"Nome", "Turma"};
+        DefaultTableModel model = new DefaultTableModel(colunas, 0); // 0 = linhas iniciais
 
+        AlunoDao alunoDao = new AlunoDao();
+        List<String[]> lista = alunoDao.listarAlunosComTurma();
+
+        for (String[] dados : lista) {
+            model.addRow(dados);
+        }
+
+        alunosTable.setModel(model);
+    }
     /**
      * @param args the command line arguments
      */
@@ -315,21 +445,19 @@ public class listaAlunos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Salvar3;
+    private javax.swing.JTable alunosTable;
+    private javax.swing.JButton btnCadastrarAlunos;
     private javax.swing.JLabel excluirTextBtn;
     private javax.swing.JLabel imgCoruja1;
     private javax.swing.JLabel imgCoruja2;
     private javax.swing.JLabel imgSair;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblAlunos;
+    private javax.swing.JLabel lblProfessores;
+    private javax.swing.JLabel lblTurmas;
     private javax.swing.JLabel txtBtnEditar;
     // End of variables declaration//GEN-END:variables
 }

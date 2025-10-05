@@ -5,6 +5,10 @@
 package model;
 
 import java.time.LocalDate;
+import conexao.ConexaoBD;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -36,5 +40,30 @@ public class Aluno {
 
     public int getIdTurma() { return idTurma; }
     public void setIdTurma(int idTurma) { this.idTurma = idTurma; }
+
+    public String getResponsavelNome() {
+        if (idResponsavel == 0) {
+            return "Não definido";
+        }
+
+        String nomeResponsavel = "Não definido";
+        String sql = "SELECT login FROM Usuario WHERE id_usuario = ?";
+
+        try (Connection conn = ConexaoBD.getConexao();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idResponsavel);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                nomeResponsavel = rs.getString("login");
+            }
+
+        } catch (Exception e) {
+            System.err.println("Erro ao buscar responsável: " + e.getMessage());
+        }
+
+        return nomeResponsavel;
+    }
     
 }

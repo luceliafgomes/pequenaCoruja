@@ -5,13 +5,21 @@
 package view;
 
 import dao.AlunoDao;
+import dao.UsuarioDao;
 import java.awt.BorderLayout;
 import java.awt.*;
 import java.awt.Image;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import javax.swing.ImageIcon;
 import javax.swing.*;
 import model.Aluno;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import javax.swing.text.MaskFormatter;
+import utils.ButtonUtils;
+import utils.TextFieldUtils;
+import view.listaAlunos;
 
 /**
  *
@@ -22,9 +30,24 @@ public class CadastroAluno extends javax.swing.JFrame {
     /**
      * Creates new form DashboardView
      */
+    private Aluno alunoEmEdicao = null;
     public CadastroAluno() {
         initComponents();
-        setSize(800, 650);
+        excluirBtn.setEnabled(false);
+        configuracaoPadrao();
+    }
+    
+    public CadastroAluno(Aluno aluno){
+    initComponents();
+    this.alunoEmEdicao = aluno;
+    preencherCampos(aluno);
+    excluirBtn.setEnabled(true); 
+    
+    configuracaoPadrao();
+    }
+    
+   private void configuracaoPadrao(){
+         setSize(800, 650);
         setLocationRelativeTo(null);
         
         getContentPane().setBackground(new Color(200,162,200));
@@ -48,7 +71,22 @@ public class CadastroAluno extends javax.swing.JFrame {
         
         imgCoruja2.setText(null);
        imgCoruja2.setIcon(new ImageIcon(imgCorujaIco01));
+
+   }
+    private void preencherCampos(Aluno aluno) {
+    nomeField.setText(aluno.getNome());
+    responsavelField.setText(aluno.getResponsavelNome());
+    historicoTxtArea.setText(aluno.getHistoricoEscolar());
+    
+    if(aluno.getDataNascimento() != null){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        dtNascimentoField.setText(aluno.getDataNascimento().format(formatter));
+    }else{
+        dtNascimentoField.setText("");
     }
+}
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,7 +202,7 @@ public class CadastroAluno extends javax.swing.JFrame {
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblAlunos.setForeground(Color.BLUE); // volta cor original
+                lblAlunos.setForeground(Color.WHITE); // volta cor original
             }
         });
         lblProfessores.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -185,7 +223,7 @@ public class CadastroAluno extends javax.swing.JFrame {
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblProfessores.setForeground(Color.BLUE); // volta cor original
+                lblProfessores.setForeground(Color.WHITE); // volta cor original
             }
         });
         lblTurmas.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -207,7 +245,7 @@ public class CadastroAluno extends javax.swing.JFrame {
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblTurmas.setForeground(Color.BLUE); // volta cor original
+                lblTurmas.setForeground(Color.WHITE); // volta cor original
             }
         });
         imgSair.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -228,7 +266,7 @@ public class CadastroAluno extends javax.swing.JFrame {
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                imgSair.setForeground(Color.BLUE); // volta cor original
+                imgSair.setForeground(Color.WHITE); // volta cor original
             }
         });
 
@@ -396,6 +434,20 @@ public class CadastroAluno extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        TextFieldUtils.estilizarCampo(nomeField);
+        TextFieldUtils.estilizarCampo(responsavelField);
+        try {
+            MaskFormatter maskData = new MaskFormatter("##-##-####");
+            maskData.install(dtNascimentoField);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        TextFieldUtils.estilizarCampo(dtNascimentoField);
+        ButtonUtils.estilizarBotao(salvarBtn);
+        ButtonUtils.estilizarBotao(cancelarBtn);
+        ButtonUtils.estilizarBotao(excluirBtn);
+        ButtonUtils.estilizarBotao(listarAlunosBtn);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -416,30 +468,93 @@ public class CadastroAluno extends javax.swing.JFrame {
 
     private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
         // TODO add your handling code here:
+        DashboardView dashboard = new DashboardView();
+        dashboard.setVisible(true);
+        CadastroAluno.this.dispose();
     }//GEN-LAST:event_cancelarBtnActionPerformed
 
     private void excluirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirBtnActionPerformed
         // TODO add your handling code here:
+        if (alunoEmEdicao == null) {
+        JOptionPane.showMessageDialog(this, "Nenhum aluno selecionado para exclusão!");
+        return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir este aluno?", 
+                                                    "Confirmação", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            AlunoDao.excluirAluno(alunoEmEdicao.getIdAluno());
+            JOptionPane.showMessageDialog(this, "Aluno excluído com sucesso!");
+            this.dispose();
+        }
     }//GEN-LAST:event_excluirBtnActionPerformed
 
     private void listarAlunosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarAlunosBtnActionPerformed
         // TODO add your handling code here:
+        
+         listaAlunos alunos = new listaAlunos();
+        alunos.setVisible(true);
+        CadastroAluno.this.dispose();
+                                         
     }//GEN-LAST:event_listarAlunosBtnActionPerformed
 
     private void salvarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarBtnActionPerformed
         // TODO add your handling code here:
          try {
+             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            String dataTexto = dtNascimentoField.getText().trim(); // formato: yyyy-MM-dd
+            LocalDate dataNascimento;
+             try {
+                 dataNascimento = LocalDate.parse(dataTexto, formatter);
+             } catch (DateTimeParseException e) {
+                 JOptionPane.showMessageDialog(this, "Data inválida! use o formato DD-MM-AAAA (Ex: 14-05-2015)", "Erro de formato", JOptionPane.ERROR_MESSAGE);
+                 return;
+             }
+             
+            String nomeAluno = nomeField.getText().trim();
+            String nomeResponsavel = responsavelField.getText().trim();
+
+            if (nomeAluno.isEmpty() || nomeResponsavel.isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Preencha o nome do aluno e do responsável.",
+                    "Campos obrigatórios", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            UsuarioDao usuarioDAO = new UsuarioDao();
+            Integer idResponsavel = usuarioDAO.buscarUsuarioPorLogin(nomeResponsavel);
+
+            if (idResponsavel == null) {
+                // Se não existe, cria um novo usuário Pai
+                idResponsavel = usuarioDAO.criarUsuarioPai(nomeResponsavel, nomeAluno);
+                JOptionPane.showMessageDialog(this, 
+                    "Novo responsável criado: " + nomeResponsavel,
+                    "Usuário Pai Criado", JOptionPane.INFORMATION_MESSAGE);
+            }
+
             Aluno aluno = new Aluno();
-            aluno.setNome(nomeField.getText());
-            aluno.setDataNascimento(LocalDate.parse(dtNascimentoField.getText())); // formato: yyyy-MM-dd
+            aluno.setNome(nomeAluno);
+            aluno.setDataNascimento(dataNascimento);
             aluno.setHistoricoEscolar(historicoTxtArea.getText());
 
             // Exemplo: vamos assumir que o responsável e a turma serão definidos fixos ou virão de campos escondidos
-            aluno.setIdResponsavel(1); // exemplo temporário
-            aluno.setIdTurma(1); // exemplo temporário
-
-            AlunoDao dao = new AlunoDao();
-            dao.salvarAluno(aluno);
+            aluno.setIdResponsavel(idResponsavel); //
+            aluno.setIdTurma(1); 
+// 
+            if (alunoEmEdicao == null){            
+                AlunoDao dao = new AlunoDao();               
+                dao.salvarAluno(aluno);
+            }
+            else
+            {
+                aluno.setIdAluno(alunoEmEdicao.getIdAluno());
+                boolean atualizar = AlunoDao.atualizarAluno(aluno);
+                if (atualizar){
+                    System.out.println("Aluno Atualizado com sucesso!");
+                }else{
+                    System.out.println("Erro ao atualizar!");
+                }
+            }
 
             // Limpa os campos
             nomeField.setText("");

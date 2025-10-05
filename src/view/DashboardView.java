@@ -167,7 +167,7 @@ public class DashboardView extends javax.swing.JFrame {
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblAlunos.setForeground(Color.BLUE); // volta cor original
+                lblAlunos.setForeground(Color.WHITE); // volta cor original
             }
         });
         lblProfessores.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -188,7 +188,7 @@ public class DashboardView extends javax.swing.JFrame {
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblProfessores.setForeground(Color.BLUE); // volta cor original
+                lblProfessores.setForeground(Color.WHITE); // volta cor original
             }
         });
         lblTurmas.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -210,7 +210,7 @@ public class DashboardView extends javax.swing.JFrame {
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblTurmas.setForeground(Color.BLUE); // volta cor original
+                lblTurmas.setForeground(Color.WHITE); // volta cor original
             }
         });
 

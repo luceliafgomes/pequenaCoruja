@@ -232,7 +232,7 @@
                 <Property name="text" type="java.lang.String" value="Alunos"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="lblAlunos.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        // C&#xf3;digo que abre a tela de Alunos&#xa;        CadastroAluno alunoView = new CadastroAluno();&#xa;        alunoView.setVisible(true);&#xa;        CadastroAluno.this.dispose();&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        lblAlunos.setForeground(Color.RED); // efeito hover&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        lblAlunos.setForeground(Color.BLUE); // volta cor original&#xa;    }&#xa;});"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="lblAlunos.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        // C&#xf3;digo que abre a tela de Alunos&#xa;        CadastroAluno alunoView = new CadastroAluno();&#xa;        alunoView.setVisible(true);&#xa;        CadastroAluno.this.dispose();&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        lblAlunos.setForeground(Color.RED); // efeito hover&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        lblAlunos.setForeground(Color.WHITE); // volta cor original&#xa;    }&#xa;});"/>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="lblAlunos.setCursor(new Cursor(Cursor.HAND_CURSOR));"/>
               </AuxValues>
             </Component>
@@ -247,7 +247,7 @@
                 <Property name="text" type="java.lang.String" value="Professores"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="lblProfessores.setCursor(new Cursor(Cursor.HAND_CURSOR));&#xa;// Code adding the component to the parent container - not shown here&#xa;lblProfessores.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        // C&#xf3;digo que abre a tela de Alunos&#xa;        CadastroProfessor profView = new CadastroProfessor();&#xa;        profView.setVisible(true);&#xa;        CadastroAluno.this.dispose();&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        lblProfessores.setForeground(Color.RED); // efeito hover&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        lblProfessores.setForeground(Color.BLUE); // volta cor original&#xa;    }&#xa;});"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="lblProfessores.setCursor(new Cursor(Cursor.HAND_CURSOR));&#xa;// Code adding the component to the parent container - not shown here&#xa;lblProfessores.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        // C&#xf3;digo que abre a tela de Alunos&#xa;        CadastroProfessor profView = new CadastroProfessor();&#xa;        profView.setVisible(true);&#xa;        CadastroAluno.this.dispose();&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        lblProfessores.setForeground(Color.RED); // efeito hover&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        lblProfessores.setForeground(Color.WHITE); // volta cor original&#xa;    }&#xa;});"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTurmas">
@@ -261,7 +261,7 @@
                 <Property name="text" type="java.lang.String" value="Turmas"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="lblTurmas.setCursor(new Cursor(Cursor.HAND_CURSOR));&#xa;// Code adding the component to the parent container - not shown here&#xa;lblTurmas.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        // C&#xf3;digo que abre a tela de Alunos&#xa;        CadastroTurmas turmaView = new CadastroTurmas();&#xa;        turmaView.setVisible(true);&#xa;        CadastroAluno.this.dispose();&#xa;&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        lblTurmas.setForeground(Color.RED); // efeito hover&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        lblTurmas.setForeground(Color.BLUE); // volta cor original&#xa;    }&#xa;});"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="lblTurmas.setCursor(new Cursor(Cursor.HAND_CURSOR));&#xa;// Code adding the component to the parent container - not shown here&#xa;lblTurmas.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        // C&#xf3;digo que abre a tela de Alunos&#xa;        CadastroTurmas turmaView = new CadastroTurmas();&#xa;        turmaView.setVisible(true);&#xa;        CadastroAluno.this.dispose();&#xa;&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        lblTurmas.setForeground(Color.RED); // efeito hover&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        lblTurmas.setForeground(Color.WHITE); // volta cor original&#xa;    }&#xa;});"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="imgSair">
@@ -269,7 +269,7 @@
                 <Property name="text" type="java.lang.String" value="sair"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="imgSair.setCursor(new Cursor(Cursor.HAND_CURSOR));&#xa;// Code adding the component to the parent container - not shown here&#xa;imgSair.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        // C&#xf3;digo que abre a tela de Alunos&#xa;        LoginView loginView = new LoginView();&#xa;        loginView.setVisible(true);&#xa;        CadastroAluno.this.dispose();&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        imgSair.setForeground(Color.RED); // efeito hover&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        imgSair.setForeground(Color.BLUE); // volta cor original&#xa;    }&#xa;});"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="imgSair.setCursor(new Cursor(Cursor.HAND_CURSOR));&#xa;// Code adding the component to the parent container - not shown here&#xa;imgSair.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        // C&#xf3;digo que abre a tela de Alunos&#xa;        LoginView loginView = new LoginView();&#xa;        loginView.setVisible(true);&#xa;        CadastroAluno.this.dispose();&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        imgSair.setForeground(Color.RED); // efeito hover&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        imgSair.setForeground(Color.WHITE); // volta cor original&#xa;    }&#xa;});"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -340,6 +340,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomeFieldActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="TextFieldUtils.estilizarCampo(nomeField);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="responsavelField">
           <Properties>
@@ -350,6 +353,9 @@
               <Border info="null"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="TextFieldUtils.estilizarCampo(responsavelField);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="dtNascimentoField">
           <Properties>
@@ -360,6 +366,9 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="try {&#xa;    MaskFormatter maskData = new MaskFormatter(&quot;##-##-####&quot;);&#xa;    maskData.install(dtNascimentoField);&#xa;} catch (java.text.ParseException e) {&#xa;    e.printStackTrace();&#xa;}&#xa;TextFieldUtils.estilizarCampo(dtNascimentoField);"/>
+          </AuxValues>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -404,6 +413,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salvarBtnActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ButtonUtils.estilizarBotao(salvarBtn);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="cancelarBtn">
           <Properties>
@@ -424,6 +436,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelarBtnActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ButtonUtils.estilizarBotao(cancelarBtn);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="excluirBtn">
           <Properties>
@@ -444,6 +459,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="excluirBtnActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ButtonUtils.estilizarBotao(excluirBtn);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="listarAlunosBtn">
           <Properties>
@@ -464,6 +482,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="listarAlunosBtnActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ButtonUtils.estilizarBotao(listarAlunosBtn);"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

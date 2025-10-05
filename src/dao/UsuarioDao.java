@@ -38,6 +38,39 @@ public class UsuarioDao {
         }
         return usuario;
     }
+    
+    public Integer buscarUsuarioPorLogin(String login) {
+        String sql = "SELECT id_usuario FROM Usuario WHERE login = ?";
+        try (Connection conn = ConexaoBD.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, login);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id_usuario");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; // não encontrou
+    }
+    
+    public int criarUsuarioPai(String login, String senha) {
+        String sql = "INSERT INTO Usuario (login, senha, perfil) VALUES (?, ?, 'Pai')";
+        try (Connection conn = ConexaoBD.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
+            stmt.executeUpdate();
+            
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1); // retorna o id do novo usuário criado
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
    
     
 }
