@@ -60,7 +60,6 @@ public class DashboardView extends javax.swing.JFrame {
         imgCoruja1 = new javax.swing.JLabel();
         imgSair = new javax.swing.JLabel();
         lblAlunos = new javax.swing.JLabel();
-        lblProfessores = new javax.swing.JLabel();
         lblTurmas = new javax.swing.JLabel();
         imgCoruja2 = new javax.swing.JLabel();
 
@@ -87,10 +86,6 @@ public class DashboardView extends javax.swing.JFrame {
         lblAlunos.setText("Alunos");
         lblAlunos.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        lblProfessores.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblProfessores.setForeground(new java.awt.Color(255, 255, 255));
-        lblProfessores.setText("Professores");
-
         lblTurmas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblTurmas.setForeground(new java.awt.Color(255, 255, 255));
         lblTurmas.setText("Turmas");
@@ -109,8 +104,7 @@ public class DashboardView extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(imgSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -121,9 +115,7 @@ public class DashboardView extends javax.swing.JFrame {
                 .addComponent(imgCoruja1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAlunos)
-                .addGap(61, 61, 61)
-                .addComponent(lblProfessores)
-                .addGap(64, 64, 64)
+                .addGap(157, 157, 157)
                 .addComponent(lblTurmas)
                 .addGap(170, 170, 170)
                 .addComponent(imgSair)
@@ -168,27 +160,6 @@ public class DashboardView extends javax.swing.JFrame {
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblAlunos.setForeground(Color.WHITE); // volta cor original
-            }
-        });
-        lblProfessores.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // Code adding the component to the parent container - not shown here
-        lblProfessores.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                // Código que abre a tela de Alunos
-                CadastroProfessor profView = new CadastroProfessor();
-                profView.setVisible(true);
-                DashboardView.this.dispose();
-            }
-
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblProfessores.setForeground(Color.RED); // efeito hover
-            }
-
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblProfessores.setForeground(Color.WHITE); // volta cor original
             }
         });
         lblTurmas.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -295,7 +266,6 @@ public class DashboardView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAlunos;
-    private javax.swing.JLabel lblProfessores;
     private javax.swing.JLabel lblTurmas;
     // End of variables declaration//GEN-END:variables
 }

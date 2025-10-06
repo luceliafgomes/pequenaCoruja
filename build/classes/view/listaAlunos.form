@@ -144,7 +144,6 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblTurmas" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
                                   <Component id="lblAlunos" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
-                                  <Component id="lblProfessores" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="15" max="-2" attributes="0"/>
                           </Group>
@@ -160,13 +159,11 @@
                       <Component id="imgCoruja1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lblAlunos" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                      <Component id="lblProfessores" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                       <Component id="lblTurmas" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
                       <Component id="imgSair" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="647" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -206,20 +203,6 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="lblTurmas.setCursor(new Cursor(Cursor.HAND_CURSOR));&#xa;// Code adding the component to the parent container - not shown here&#xa;lblTurmas.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        // C&#xf3;digo que abre a tela de Alunos&#xa;        CadastroTurmas turmaView = new CadastroTurmas();&#xa;        turmaView.setVisible(true);&#xa;        listaAlunos.this.dispose();&#xa;&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        lblTurmas.setForeground(Color.RED); // efeito hover&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        lblTurmas.setForeground(Color.WHITE); // volta cor original&#xa;    }&#xa;});"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblProfessores">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="24" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Professores"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="lblProfessores.setCursor(new Cursor(Cursor.HAND_CURSOR));&#xa;// Code adding the component to the parent container - not shown here&#xa;lblProfessores.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        // C&#xf3;digo que abre a tela de Alunos&#xa;        CadastroProfessor profView = new CadastroProfessor();&#xa;        profView.setVisible(true);&#xa;        listaAlunos.this.dispose();&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        lblProfessores.setForeground(Color.RED); // efeito hover&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        lblProfessores.setForeground(Color.WHITE); // volta cor original&#xa;    }&#xa;});"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblAlunos">
@@ -280,10 +263,33 @@
                   <Color blue="0" green="0" red="0" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="2" rowCount="2">
+                  <Table columnCount="3" rowCount="3">
+                    <Column editable="true" title="id" type="java.lang.Object"/>
                     <Column editable="true" title="Nome" type="java.lang.Object"/>
                     <Column editable="true" title="Turma" type="java.lang.Object"/>
                   </Table>
+                </Property>
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                  <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                  </TableColumnModel>
+                </Property>
+                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
             </Component>
@@ -302,6 +308,9 @@
               <Dimension value="[42, 42]"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="excluirTextBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));&#xa;excluirTextBtn.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        int selectedRow = alunosTable.getSelectedRow();&#xa;        if (selectedRow == -1) {&#xa;            JOptionPane.showMessageDialog(null, &#xa;                &quot;Selecione um aluno para excluir.&quot;, &#xa;                &quot;Aviso&quot;, JOptionPane.WARNING_MESSAGE);&#xa;            return;&#xa;        }&#xa;&#xa;        int confirm = JOptionPane.showConfirmDialog(&#xa;            null, &#xa;            &quot;Tem certeza que deseja excluir este aluno?&quot;, &#xa;            &quot;Confirma&#xe7;&#xe3;o&quot;, &#xa;            JOptionPane.YES_NO_OPTION&#xa;        );&#xa;&#xa;        if (confirm == JOptionPane.YES_OPTION) {&#xa;            int idAluno = Integer.parseInt(alunosTable.getValueAt(selectedRow, 0).toString());&#xa;            boolean sucesso = AlunoDao.excluirAluno(idAluno);&#xa;&#xa;            if (sucesso) {&#xa;                JOptionPane.showMessageDialog(null, &#xa;                    &quot;Aluno exclu&#xed;do com sucesso!&quot;, &#xa;                    &quot;Sucesso&quot;, JOptionPane.INFORMATION_MESSAGE);&#xa;                preencherTabela(); // Atualiza a tabela&#xa;            } else {&#xa;                JOptionPane.showMessageDialog(null, &#xa;                    &quot;Erro ao excluir aluno.&quot;, &#xa;                    &quot;Erro&quot;, JOptionPane.ERROR_MESSAGE);&#xa;            }&#xa;        }&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        excluirTextBtn.setForeground(Color.RED);&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        excluirTextBtn.setForeground(Color.BLACK);&#xa;    }&#xa;});"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="txtBtnEditar">
           <Properties>

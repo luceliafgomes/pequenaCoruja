@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/devs/java/atividade%201/pequenaCoruja02/src/dao/UsuarioDao.java</file>
+            <file>file:/D:/devs/java/atividade%201/pequenaCoruja02/src/view/LoginView.java</file>
+            <file>file:/D:/devs/java/atividade%201/pequenaCoruja02/src/model/Usuario.java</file>
+            <file>file:/D:/devs/java/atividade%201/pequenaCoruja02/src/view/DashboardView.java</file>
+            <file>file:/D:/devs/java/atividade%201/pequenaCoruja02/src/view/CadastroAluno.java</file>
+            <file>file:/D:/devs/java/atividade%201/pequenaCoruja02/src/dao/AlunoDao.java</file>
+            <file>file:/D:/devs/java/atividade%201/pequenaCoruja02/src/model/Aluno.java</file>
+            <file>file:/D:/devs/java/atividade%201/pequenaCoruja02/src/view/listaAlunos.java</file>
+            <file>file:/D:/devs/java/atividade%201/pequenaCoruja02/src/view/CadastroTurmas.java</file>
+            <file>file:/D:/devs/java/atividade%201/pequenaCoruja02/src/model/Turma.java</file>
+            <file>file:/D:/devs/java/atividade%201/pequenaCoruja02/src/dao/TurmaDao.java</file>
+            <file>file:/D:/devs/java/atividade%201/pequenaCoruja02/src/view/ListaTurmas.java</file>
+        </group>
+    </open-files>
+</project-private>

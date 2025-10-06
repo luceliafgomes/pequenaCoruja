@@ -4,11 +4,20 @@
  */
 package view;
 
+import dao.TurmaDao;
+import model.Turma;
 import java.awt.BorderLayout;
 import java.awt.*;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import utils.ButtonUtils;
+import java.util.List;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -55,8 +64,34 @@ public class ListaTurmas extends javax.swing.JFrame {
         txtBtnEditar.setIcon(new ImageIcon(imgEditIco));
         
         excluirTextBtn.setIcon(new ImageIcon(imgDeleteIco));
-      
+        
+         DefaultTableModel model = (DefaultTableModel) turmasTable.getModel();
+        
+        turmasTable.getColumnModel().getColumn(0).setMinWidth(0);
+        turmasTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        turmasTable.getColumnModel().getColumn(0).setWidth(0);
+        preencherTabela();
     }
+    
+      private void preencherTabela() {
+    DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Nome da Turma"}, 0);
+
+    TurmaDao turmaDao = new TurmaDao();
+    List<Turma> turmas = turmaDao.listarTodas();
+
+    for (Turma t : turmas) {
+        model.addRow(new Object[]{t.getIdTurma(), t.getNome()});
+        System.out.println("turma:" + t);
+    }
+
+    turmasTable.setModel(model);
+
+    // Ocultar coluna ID novamente (por precaução)
+    turmasTable.getColumnModel().getColumn(0).setMinWidth(0);
+    turmasTable.getColumnModel().getColumn(0).setMaxWidth(0);
+    turmasTable.getColumnModel().getColumn(0).setWidth(0);
+}
+       
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,18 +105,15 @@ public class ListaTurmas extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         imgCoruja1 = new javax.swing.JLabel();
         imgSair = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblTurmas = new javax.swing.JLabel();
+        lblAlunos = new javax.swing.JLabel();
         imgCoruja2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        turmasTable = new javax.swing.JTable();
         txtBtnEditar = new javax.swing.JLabel();
         excluirTextBtn = new javax.swing.JLabel();
-        Salvar3 = new javax.swing.JButton();
+        cadastrarAlunosBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 219, 255));
@@ -102,25 +134,14 @@ public class ListaTurmas extends javax.swing.JFrame {
 
         imgSair.setText("sair");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Alunos");
+        lblTurmas.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblTurmas.setForeground(new java.awt.Color(255, 255, 255));
+        lblTurmas.setText("Turmas");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Atividades");
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Professores");
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Turmas");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Notas");
+        lblAlunos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblAlunos.setForeground(new java.awt.Color(255, 255, 255));
+        lblAlunos.setText("Alunos");
+        lblAlunos.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -129,17 +150,14 @@ public class ListaTurmas extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(imgCoruja1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(imgSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -148,20 +166,77 @@ public class ListaTurmas extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(imgCoruja1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(44, 44, 44)
-                .addComponent(jLabel2)
-                .addGap(46, 46, 46)
-                .addComponent(jLabel4)
-                .addGap(54, 54, 54)
-                .addComponent(jLabel5)
-                .addGap(47, 47, 47)
-                .addComponent(jLabel6)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
+                .addComponent(lblAlunos)
+                .addGap(157, 157, 157)
+                .addComponent(lblTurmas)
+                .addGap(170, 170, 170)
                 .addComponent(imgSair)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
+
+        imgSair.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // Code adding the component to the parent container - not shown here
+        imgSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                LoginView loginView = new LoginView();
+                loginView.setVisible(true);
+                ListaTurmas.this.dispose();
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                imgSair.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                imgSair.setForeground(Color.WHITE); // volta cor original
+            }
+        });
+        lblTurmas.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        // Code adding the component to the parent container - not shown here
+        lblTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                CadastroTurmas turmaView = new CadastroTurmas();
+                turmaView.setVisible(true);
+                ListaTurmas.this.dispose();
+
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblTurmas.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblTurmas.setForeground(Color.WHITE); // volta cor original
+            }
+        });
+        lblAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                // Código que abre a tela de Alunos
+                CadastroAluno alunoView = new CadastroAluno();
+                alunoView.setVisible(true);
+                ListaTurmas.this.dispose();
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblAlunos.setForeground(Color.RED); // efeito hover
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblAlunos.setForeground(Color.WHITE); // volta cor original
+            }
+        });
 
         imgCoruja2.setText("coruja02");
         imgCoruja2.setMaximumSize(new java.awt.Dimension(150, 150));
@@ -171,19 +246,19 @@ public class ListaTurmas extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
         jLabel3.setText("Lista de Turmas");
 
-        jTable1.setBackground(new java.awt.Color(200, 162, 200));
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        turmasTable.setBackground(new java.awt.Color(200, 162, 200));
+        turmasTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        turmasTable.setForeground(new java.awt.Color(0, 0, 0));
+        turmasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null}
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Turma"
+                "id", "Turma"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(turmasTable);
 
         txtBtnEditar.setText("Editar");
         txtBtnEditar.setMaximumSize(new java.awt.Dimension(45, 45));
@@ -194,17 +269,27 @@ public class ListaTurmas extends javax.swing.JFrame {
         excluirTextBtn.setMaximumSize(new java.awt.Dimension(45, 45));
         excluirTextBtn.setMinimumSize(new java.awt.Dimension(42, 42));
         excluirTextBtn.setPreferredSize(new java.awt.Dimension(42, 42));
-
-        Salvar3.setBackground(new java.awt.Color(200, 162, 200));
-        Salvar3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Salvar3.setForeground(new java.awt.Color(255, 255, 255));
-        Salvar3.setText("Cadastrar Alunos");
-        Salvar3.setBorder(null);
-        Salvar3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Salvar3ActionPerformed(evt);
+        excluirTextBtn.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                excluirTextBtnAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+
+        cadastrarAlunosBtn.setBackground(new java.awt.Color(200, 162, 200));
+        cadastrarAlunosBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cadastrarAlunosBtn.setForeground(new java.awt.Color(255, 255, 255));
+        cadastrarAlunosBtn.setText("Cadastrar Alunos");
+        cadastrarAlunosBtn.setBorder(null);
+        cadastrarAlunosBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarAlunosBtnActionPerformed(evt);
+            }
+        });
+        ButtonUtils.estilizarBotao(cadastrarAlunosBtn);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -223,7 +308,7 @@ public class ListaTurmas extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(Salvar3, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cadastrarAlunosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(12, 12, 12))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(txtBtnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,13 +335,100 @@ public class ListaTurmas extends javax.swing.JFrame {
                             .addComponent(excluirTextBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtBtnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(Salvar3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cadastrarAlunosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addComponent(imgCoruja2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24))))
         );
+
+        txtBtnEditar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        txtBtnEditar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int linhaSelecionada = turmasTable.getSelectedRow();
+
+                if (linhaSelecionada == -1) {
+                    JOptionPane.showMessageDialog(null, "Selecione uma turma para editar!");
+                    return;
+                }
+
+                int idTurma = (int) turmasTable.getValueAt(linhaSelecionada, 0);
+                TurmaDao dao = new TurmaDao();
+                Turma turma = dao.buscarPorId(idTurma);
+
+                if (turma != null) {
+                    CadastroTurmas telaEdicao = new CadastroTurmas(turma);
+                    telaEdicao.setVisible(true);
+                    dispose(); // fecha a tela atual, se quiser
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao carregar turma para edição!");
+                }
+            }
+        });
+        excluirTextBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        excluirTextBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int linhaSelecionada = turmasTable.getSelectedRow();
+
+                if (linhaSelecionada == -1) {
+                    JOptionPane.showMessageDialog(null, "Selecione uma turma para excluir!");
+                    return;
+                }
+
+                // Pega o id da turma (mesmo estando oculto)
+                int idTurma = (int) turmasTable.getValueAt(linhaSelecionada, 0);
+
+                int confirm = JOptionPane.showConfirmDialog(null,
+                    "Deseja realmente excluir esta turma?", "Confirmação", JOptionPane.YES_NO_OPTION);
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    TurmaDao dao = new TurmaDao();
+                    boolean sucesso = dao.deletar(idTurma);
+
+                    if (sucesso) {
+                        JOptionPane.showMessageDialog(null, "Turma excluída com sucesso!");
+                        preencherTabela(); // Atualiza a tabela
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Erro ao excluir turma!");
+                    }
+                }
+            }
+        });
+
+        excluirTextBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int linhaSelecionada = turmasTable.getSelectedRow();
+                if (linhaSelecionada == -1) {
+                    JOptionPane.showMessageDialog(null, "Selecione uma turma para excluir.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                int idTurma = (int) turmasTable.getValueAt(linhaSelecionada, 0);
+                String nomeTurma = (String) turmasTable.getValueAt(linhaSelecionada, 1);
+
+                int confirm = JOptionPane.showConfirmDialog(null,
+                    "Tem certeza que deseja excluir a turma \"" + nomeTurma + "\"?\n" +
+                    "Os alunos serão movidos para a turma padrão (ID 1).",
+                    "Confirmar exclusão",
+                    JOptionPane.YES_NO_OPTION);
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    TurmaDao dao = new TurmaDao();
+                    boolean sucesso = dao.excluirTurmaComAlunos(idTurma);
+
+                    if (sucesso) {
+                        JOptionPane.showMessageDialog(null, "Turma excluída com sucesso!");
+                        preencherTabela(); // atualiza a tabela de turmas
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Erro ao excluir turma.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -272,9 +444,18 @@ public class ListaTurmas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Salvar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Salvar3ActionPerformed
+    private void cadastrarAlunosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarAlunosBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Salvar3ActionPerformed
+        CadastroTurmas cadastro = new CadastroTurmas();
+        cadastro.setVisible(true);
+        ListaTurmas.this.dispose();
+    }//GEN-LAST:event_cadastrarAlunosBtnActionPerformed
+
+    private void excluirTextBtnAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_excluirTextBtnAncestorAdded
+        // TODO add your handling code here:
+            
+        
+    }//GEN-LAST:event_excluirTextBtnAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -315,21 +496,18 @@ public class ListaTurmas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Salvar3;
+    private javax.swing.JButton cadastrarAlunosBtn;
     private javax.swing.JLabel excluirTextBtn;
     private javax.swing.JLabel imgCoruja1;
     private javax.swing.JLabel imgCoruja2;
     private javax.swing.JLabel imgSair;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblAlunos;
+    private javax.swing.JLabel lblTurmas;
+    private javax.swing.JTable turmasTable;
     private javax.swing.JLabel txtBtnEditar;
     // End of variables declaration//GEN-END:variables
 }

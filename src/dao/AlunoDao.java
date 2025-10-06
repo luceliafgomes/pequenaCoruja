@@ -78,17 +78,21 @@ public class AlunoDao {
          
     public List<String[]> listarAlunosComTurma() {
         List<String[]> lista = new ArrayList<>();
-        String sql = "SELECT a.nome AS aluno, t.nome AS turma "
-                   + "FROM Aluno a LEFT JOIN Turma t ON a.id_turma = t.id_turma";
+        String sql ="""
+        SELECT a.id_aluno, a.nome AS aluno, t.nome AS turma
+        FROM Aluno a
+        LEFT JOIN Turma t ON a.id_turma = t.id_turma
+    """;
 
         try (Connection con = ConexaoBD.getConexao();
              PreparedStatement stmt = con.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
+                String id = String.valueOf(rs.getInt("id_aluno"));
                 String nomeAluno = rs.getString("aluno");
                 String nomeTurma = rs.getString("turma");
-                lista.add(new String[]{nomeAluno, nomeTurma});
+                lista.add(new String[]{id, nomeAluno, nomeTurma});
             }
 
         } catch (SQLException e) {
@@ -96,7 +100,33 @@ public class AlunoDao {
         }
         return lista;
     }
-    
+    public List<Aluno> listarAlunosPorTurma(int idTurma) {
+    List<Aluno> lista = new ArrayList<>();
+    String sql = """
+        SELECT a.id_aluno, a.nome, a.id_turma
+        FROM Aluno a
+        WHERE a.id_turma = ?
+    """;
+    try (Connection con = ConexaoBD.getConexao();
+         PreparedStatement stmt = con.prepareStatement(sql)) {
+
+        stmt.setInt(1, idTurma);
+        try (ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Aluno a = new Aluno();
+                a.setIdAluno(rs.getInt("id_aluno"));
+                a.setNome(rs.getString("nome"));
+                a.setIdTurma(rs.getInt("id_turma"));
+                lista.add(a);
+            }
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return lista;
+}
     public Aluno buscarPorNome(String nome) {
         Aluno aluno = null;
         String sql = "SELECT * FROM Aluno WHERE nome = ?";
@@ -119,5 +149,47 @@ public class AlunoDao {
         return aluno;
     }
     
-    
+    public List<Aluno> listarAlunosDaTurmaPadrao() {
+        List<Aluno> lista = new ArrayList<>();
+        String sql = "SELECT id_aluno, nome FROM Aluno WHERE id_turma = 1";
+
+        try (Connection con = ConexaoBD.getConexao();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Aluno a = new Aluno();
+                a.setIdAluno(rs.getInt("id_aluno"));
+                a.setNome(rs.getString("nome"));
+                lista.add(a);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    public Aluno buscarPorId(int idAluno) {
+    String sql = "SELECT * FROM Aluno WHERE id_aluno = ?";
+    try (Connection conn = ConexaoBD.getConexao();
+        PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, idAluno);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                Aluno aluno = new Aluno();
+                aluno.setIdAluno(rs.getInt("id_aluno"));
+                aluno.setNome(rs.getString("nome"));
+                aluno.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
+                aluno.setHistoricoEscolar(rs.getString("historico_escolar"));
+                aluno.setIdResponsavel(rs.getInt("id_responsavel"));
+                aluno.setIdTurma(rs.getInt("id_turma"));
+                return aluno;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

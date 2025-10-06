@@ -30,9 +30,9 @@ public class listaAlunos extends javax.swing.JFrame {
         
         DefaultTableModel model = (DefaultTableModel) alunosTable.getModel();
         model.addColumn("ID"); // primeira coluna, invisível
-        alunosTable.getColumnModel().getColumn(0).setMinWidth(0);
-        alunosTable.getColumnModel().getColumn(0).setMaxWidth(0);
-        alunosTable.getColumnModel().getColumn(0).setWidth(0);
+       // alunosTable.getColumnModel().getColumn(0).setMinWidth(0);
+        //alunosTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        //alunosTable.getColumnModel().getColumn(0).setWidth(0);
         
         setSize(800, 650);
         setLocationRelativeTo(null);
@@ -86,7 +86,6 @@ public class listaAlunos extends javax.swing.JFrame {
         imgCoruja1 = new javax.swing.JLabel();
         imgSair = new javax.swing.JLabel();
         lblTurmas = new javax.swing.JLabel();
-        lblProfessores = new javax.swing.JLabel();
         lblAlunos = new javax.swing.JLabel();
         imgCoruja2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -118,10 +117,6 @@ public class listaAlunos extends javax.swing.JFrame {
         lblTurmas.setForeground(new java.awt.Color(255, 255, 255));
         lblTurmas.setText("Turmas");
 
-        lblProfessores.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lblProfessores.setForeground(new java.awt.Color(255, 255, 255));
-        lblProfessores.setText("Professores");
-
         lblAlunos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblAlunos.setForeground(new java.awt.Color(255, 255, 255));
         lblAlunos.setText("Alunos");
@@ -141,8 +136,7 @@ public class listaAlunos extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTurmas, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblProfessores, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(imgSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(15, 15, 15))
@@ -153,13 +147,11 @@ public class listaAlunos extends javax.swing.JFrame {
                 .addComponent(imgCoruja1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblAlunos)
-                .addGap(61, 61, 61)
-                .addComponent(lblProfessores)
-                .addGap(64, 64, 64)
+                .addGap(157, 157, 157)
                 .addComponent(lblTurmas)
                 .addGap(170, 170, 170)
                 .addComponent(imgSair)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(647, Short.MAX_VALUE))
         );
 
         imgSair.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -205,27 +197,6 @@ public class listaAlunos extends javax.swing.JFrame {
                 lblTurmas.setForeground(Color.WHITE); // volta cor original
             }
         });
-        lblProfessores.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        // Code adding the component to the parent container - not shown here
-        lblProfessores.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                // Código que abre a tela de Alunos
-                CadastroProfessor profView = new CadastroProfessor();
-                profView.setVisible(true);
-                listaAlunos.this.dispose();
-            }
-
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblProfessores.setForeground(Color.RED); // efeito hover
-            }
-
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblProfessores.setForeground(Color.WHITE); // volta cor original
-            }
-        });
         lblAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -259,11 +230,12 @@ public class listaAlunos extends javax.swing.JFrame {
         alunosTable.setForeground(new java.awt.Color(0, 0, 0));
         alunosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nome", "Turma"
+                "id", "Nome", "Turma"
             }
         ));
         jScrollPane1.setViewportView(alunosTable);
@@ -341,6 +313,52 @@ public class listaAlunos extends javax.swing.JFrame {
                 .addGap(596, 596, 596))
         );
 
+        excluirTextBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        excluirTextBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int selectedRow = alunosTable.getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(null,
+                        "Selecione um aluno para excluir.",
+                        "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                int confirm = JOptionPane.showConfirmDialog(
+                    null,
+                    "Tem certeza que deseja excluir este aluno?",
+                    "Confirmação",
+                    JOptionPane.YES_NO_OPTION
+                );
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    int idAluno = Integer.parseInt(alunosTable.getValueAt(selectedRow, 0).toString());
+                    boolean sucesso = AlunoDao.excluirAluno(idAluno);
+
+                    if (sucesso) {
+                        JOptionPane.showMessageDialog(null,
+                            "Aluno excluído com sucesso!",
+                            "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                        preencherTabela(); // Atualiza a tabela
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                            "Erro ao excluir aluno.",
+                            "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                excluirTextBtn.setForeground(Color.RED);
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                excluirTextBtn.setForeground(Color.BLACK);
+            }
+        });
         txtBtnEditar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         txtBtnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -394,7 +412,7 @@ public class listaAlunos extends javax.swing.JFrame {
         listaAlunos.this.dispose();
     }//GEN-LAST:event_btnCadastrarAlunosActionPerformed
     public void preencherTabela() {
-        String[] colunas = {"Nome", "Turma"};
+        String[] colunas = {"ID","Nome", "Turma"};
         DefaultTableModel model = new DefaultTableModel(colunas, 0); // 0 = linhas iniciais
 
         AlunoDao alunoDao = new AlunoDao();
@@ -405,6 +423,9 @@ public class listaAlunos extends javax.swing.JFrame {
         }
 
         alunosTable.setModel(model);
+        alunosTable.getColumnModel().getColumn(0).setMinWidth(0);
+        alunosTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        alunosTable.getColumnModel().getColumn(0).setWidth(0);
     }
     /**
      * @param args the command line arguments
@@ -456,7 +477,6 @@ public class listaAlunos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAlunos;
-    private javax.swing.JLabel lblProfessores;
     private javax.swing.JLabel lblTurmas;
     private javax.swing.JLabel txtBtnEditar;
     // End of variables declaration//GEN-END:variables

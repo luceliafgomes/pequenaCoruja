@@ -179,7 +179,6 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblTurmas" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
                                   <Component id="lblAlunos" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
-                                  <Component id="lblProfessores" alignment="0" min="-2" pref="202" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="15" max="-2" attributes="0"/>
                           </Group>
@@ -195,13 +194,11 @@
                       <Component id="imgCoruja1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lblAlunos" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                      <Component id="lblProfessores" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                       <Component id="lblTurmas" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
                       <Component id="imgSair" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="75" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -234,20 +231,6 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="lblAlunos.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        // C&#xf3;digo que abre a tela de Alunos&#xa;        CadastroAluno alunoView = new CadastroAluno();&#xa;        alunoView.setVisible(true);&#xa;        CadastroAluno.this.dispose();&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        lblAlunos.setForeground(Color.RED); // efeito hover&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        lblAlunos.setForeground(Color.WHITE); // volta cor original&#xa;    }&#xa;});"/>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="lblAlunos.setCursor(new Cursor(Cursor.HAND_CURSOR));"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblProfessores">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="24" style="0"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Professores"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="lblProfessores.setCursor(new Cursor(Cursor.HAND_CURSOR));&#xa;// Code adding the component to the parent container - not shown here&#xa;lblProfessores.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    @Override&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        // C&#xf3;digo que abre a tela de Alunos&#xa;        CadastroProfessor profView = new CadastroProfessor();&#xa;        profView.setVisible(true);&#xa;        CadastroAluno.this.dispose();&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        lblProfessores.setForeground(Color.RED); // efeito hover&#xa;    }&#xa;&#xa;    @Override&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        lblProfessores.setForeground(Color.WHITE); // volta cor original&#xa;    }&#xa;});"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTurmas">
