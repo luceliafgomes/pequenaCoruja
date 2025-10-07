@@ -8,7 +8,6 @@ import dao.AlunoDao;
 import java.awt.BorderLayout;
 import java.awt.*;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
@@ -22,17 +21,11 @@ import utils.ButtonUtils;
  */
 public class listaAlunos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DashboardView
-     */
     public listaAlunos() {
         initComponents();
         
         DefaultTableModel model = (DefaultTableModel) alunosTable.getModel();
-        model.addColumn("ID"); // primeira coluna, invisível
-       // alunosTable.getColumnModel().getColumn(0).setMinWidth(0);
-        //alunosTable.getColumnModel().getColumn(0).setMaxWidth(0);
-        //alunosTable.getColumnModel().getColumn(0).setWidth(0);
+        model.addColumn("ID"); 
         
         setSize(800, 650);
         setLocationRelativeTo(null);
@@ -413,7 +406,7 @@ public class listaAlunos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarAlunosActionPerformed
     public void preencherTabela() {
         String[] colunas = {"ID","Nome", "Turma"};
-        DefaultTableModel model = new DefaultTableModel(colunas, 0); // 0 = linhas iniciais
+        DefaultTableModel model = new DefaultTableModel(colunas, 0); 
 
         AlunoDao alunoDao = new AlunoDao();
         List<String[]> lista = alunoDao.listarAlunosComTurma();

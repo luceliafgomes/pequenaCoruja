@@ -5,27 +5,16 @@
 package view;
 
 import dao.UsuarioDao;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.Insets;
 import java.io.InputStream;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import model.Usuario;
-import utils.ButtonUtils;
 
 /**
  *
@@ -33,18 +22,14 @@ import utils.ButtonUtils;
  */
 public class LoginView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LoginView
-     */
+ 
     public LoginView() {
         initComponents();
         setSize(650, 600);
         setLocationRelativeTo(null);
         setResizable(false);
         
-       // getContentPane().removeAll();
-        //getContentPane().setLayout(new BorderLayout());
-        
+          
         getContentPane().setBackground(new Color(200,162,200));
         
         try{
@@ -92,44 +77,6 @@ public class LoginView extends javax.swing.JFrame {
         imgreverseLabel.setIcon(new ImageIcon(bufferedImg));
         
         
-       /* JPanel painelLogin = new JPanel(new GridBagLayout());
-
-        painelLogin.setBackground(new java.awt.Color(200, 162, 200));
-
-        painelLogin.setForeground(new java.awt.Color(200, 162, 200));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10,10,10,10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        // Code of sub-components - not shown here
-        gbc.gridx= 1;
-        gbc.gridy = 0;
-        painelLogin.add(new JLabel("Login"), gbc);
-
-        gbc.gridx= 1;
-        gbc.gridy = 1;
-        painelLogin.add(new JTextField(15), gbc);
-        // Code of sub-components - not shown here
-        gbc.gridx= 1;
-        gbc.gridy = 2;
-        painelLogin.add(new JLabel("Senha"), gbc);
-
-        gbc.gridx= 1;
-        gbc.gridy = 3;
-        painelLogin.add(new JTextField(15), gbc);
-
-        gbc.gridx= 1;
-        gbc.gridy = 4;
-        gbc.gridwidth = 1;
-        gbc.anchor = GridBagConstraints.CENTER;
-        painelLogin.add(new JButton("Entrar"), gbc);
-        
-        
-        //getContentPane().add(painelLogin, BorderLayout.CENTER);
-       painelLogin.setBounds(150,200,300,400);
-       getContentPane().add(painelLogin);
-// Layout setup code - not shown here
-        */
-
 // Code adding the component to the parent container - not shown here
 
     }

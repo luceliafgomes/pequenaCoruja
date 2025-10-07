@@ -16,7 +16,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import utils.ButtonUtils;
 import java.util.List;
-import java.util.ArrayList;
 
 
 /**

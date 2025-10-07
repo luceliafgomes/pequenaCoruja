@@ -9,7 +9,6 @@ import dao.UsuarioDao;
 import java.awt.BorderLayout;
 import java.awt.*;
 import java.awt.Image;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import javax.swing.ImageIcon;
 import javax.swing.*;
@@ -508,7 +507,6 @@ public class CadastroAluno extends javax.swing.JFrame {
             aluno.setDataNascimento(dataNascimento);
             aluno.setHistoricoEscolar(historicoTxtArea.getText());
 
-            // Exemplo: vamos assumir que o responsável e a turma serão definidos fixos ou virão de campos escondidos
             aluno.setIdResponsavel(idResponsavel); //
             aluno.setIdTurma(1); 
 // 
